@@ -11,9 +11,16 @@ import UIKit
 final class RectangleFactory{
     private let width: Double = 150
     private let height: Double = 120
+    private let labelWidth: Double = 300
+    private let labelHeight: Double = 60
     
     func makeSize() -> MySize{
         let size = MySize(width: self.width, height: self.height)
+        return size
+    }
+    
+    func makeLabelSize() -> MySize{
+        let size = MySize(width: self.labelWidth, height: self.labelHeight)
         return size
     }
     
@@ -22,6 +29,17 @@ final class RectangleFactory{
         let xPoint = Int.random(in: 0..<Int(maxWidth))
         
         let maxHeight = viewHeight - height
+        let yPoint = Int.random(in: 30..<Int(maxHeight))
+        
+        let point = MyPoint(x: Double(xPoint), y: Double(yPoint))
+        return point
+    }
+    
+    func makeLabelPoint(viewWidth: Double, viewHeight: Double) -> MyPoint{
+        let maxWidth = viewWidth - labelWidth
+        let xPoint = Int.random(in: 0..<Int(maxWidth))
+        
+        let maxHeight = viewHeight - labelHeight
         let yPoint = Int.random(in: 30..<Int(maxHeight))
         
         let point = MyPoint(x: Double(xPoint), y: Double(yPoint))
@@ -79,7 +97,7 @@ extension RectangleFactory{
     }
     
     func makePosition(text: MyText, viewWidth: Double, viewHeight: Double) -> Label{
-        let labelRectangle = Label(text: text, color: makeColor(), id: IDFactory.makeID(), size: makeSize(), point: makePoint(viewWidth: viewWidth, viewHeight: viewHeight), alpha: makeAlpha())
+        let labelRectangle = Label(text: text, color: makeColor(), id: IDFactory.makeID(), size: makeLabelSize(), point: makeLabelPoint(viewWidth: viewWidth, viewHeight: viewHeight), alpha: makeAlpha())
         return labelRectangle
     }
 }

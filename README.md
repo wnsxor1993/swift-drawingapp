@@ -3,11 +3,49 @@
 
 | 날짜       | 번호   | 내용                             | 비고                                             |
 | ---------- | :----- | ------------------------------| ---------------------------------------------- |
+| 2022.03.18 | Step07 | 텍스트 추가하기.                 | Label을 추가하는 기능 구현                           |
+| 2022.03.17 | Step06 | 위치/크기 속성 변경               | 추가된 View들에 대한 위치, 크기 속성 변경 기능 구현        |
 | 2022.03.14 | Step05 | 터치와 드래그                    | 추가된 View들에 대한 드래그 기능 구현                   |
 | 2022.03.11 | Step04 | 사진 추가하기                    | UIImagePickerController를 활용한 앨범 사진 View 추가  |
 | 2022.03.08 | Step03 | 관찰자(Observer) 패턴 적용        | Step02 단계에서 구현한 기능 Observer패턴과 결합         |
 | 2022.03.04 | Step02 | 속성 변경 동작                   | 사각형 속성 조정 컨트롤 뷰 및 관련 기능 구현              |
 | 2022.02.28 | Step01 | 아이패드 앱 프로젝트               | 사각형 View 랜덤 생성 관련 Model, VC 구현             |
+
+------
+## [Step07] 
+### Description
+- 메인 View에 Label을 추가하는 기능 구현
+
+### Task
+- [x] Label 생성 버튼 구현
+- [x] Label 관련 Model 구조 구현 (MyText, Label 등)
+- [x] 기존의 생성 및 추가 관련 구조에 Label 구조 추가
+    - [x] Factory를 통한 생성
+    - [x] Plane에서의 관리
+    - [x] Slider / Stepper 연결
+    - [x] tap/drag Gesture 연결
+    
+### 결과 화면
+- 정상 작동.gif
+<img src = "https://user-images.githubusercontent.com/44107696/158971907-4264b96a-4d34-44b7-90c3-0b8dbe3f0fbe.gif" width="710" height="570">
+
+
+------
+## [Step06] 
+### Description
+- 추가된 View들에 대해서 위치와 크기 속성 변경 기능 구현
+
+### Task
+- [x] 전반적인 Notification 구조 변경
+- [x] AttributerView에 위치, 크기 관련 Stepper, Label 추가
+    - [x] Stepper Delegate 구현 및 연결
+    - [x] Stepper value change 관련 액션 구현
+    - [x] tap과 drag Gesture에 따른 View와 Model의 value change 연동
+    
+### 결과 화면
+- 정상 작동.gif
+<img src = "https://user-images.githubusercontent.com/44107696/158551824-0964f587-9a1c-4bd9-a544-10d2d24528d3.gif" width="710" height="570">
+
 
 ------
 ## [Step05] 

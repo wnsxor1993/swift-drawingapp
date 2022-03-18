@@ -120,9 +120,8 @@ extension MainViewController{
         guard let labelValue = notification.userInfo?[Plane.NotificationName.userInfoKey] as? Label else { return }
         
         let labelView = CustomViewFactory.makeViewFrame(value: labelValue)
-        
         labelView.text = CustomViewFactory.setLabelViewText(value: labelValue)
-        let newSize = labelView.intrinsicContentSize
+        labelView.textAlignment = .center
         
         labelView.restorationIdentifier = CustomViewFactory.setViewID(value: labelValue)
         labelView.backgroundColor = CustomViewFactory.setViewBackgroundColor(value: labelValue)
@@ -164,7 +163,7 @@ extension MainViewController{
 }
 
 
-// MARK: - Use case: Click Rectangle / Image View
+// MARK: - Use case: Click Rectangle / Image View / Label
 
 extension MainViewController {
     @objc func tapGesture(_ gesture: UITapGestureRecognizer){
@@ -252,7 +251,7 @@ extension MainViewController{
 }
 
 
-// MARK: - Use case: Drag Rectangle / Image View
+// MARK: - Use case: Drag Rectangle / Image View / Label
 
 extension MainViewController {
     @objc func dragGesture(_ gesture: UIPanGestureRecognizer){
