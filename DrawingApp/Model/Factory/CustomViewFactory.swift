@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class CustomViewFactory{
-    static func setViewBackgroundColor(value: RectValue) -> UIColor{
+    static func setViewBackgroundColor(value: RectValue) -> UIColor{    
         return UIColor(red: value.color.redValue(), green: value.color.greenValue(), blue: value.color.blueValue(), alpha: 1)
     }
     

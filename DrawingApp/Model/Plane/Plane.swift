@@ -113,8 +113,8 @@ extension Plane{
         NotificationCenter.default.post(name: Plane.NotificationName.changeAlpha, object: self)
     }
     
-    func changeRectangleColor(newColor: RGBColor){
-        guard let rectangle = selectedValue as? Rectangle else{
+    func changeRectValueColor(newColor: RGBColor){
+        guard let rectangle = selectedValue else{
             return
         }
         

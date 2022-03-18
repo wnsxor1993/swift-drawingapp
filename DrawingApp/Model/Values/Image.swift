@@ -17,7 +17,8 @@ final class Image: RectValue, CustomStringConvertible{
     
     init(image: MyImage, id: String, size: MySize, point: MyPoint, alpha: Alpha){
         self.image = image
-        super.init(id: id, size: size, point: point, alpha: alpha)
+        let color = RGBColor(red: 0, green: 0, blue: 0)
+        super.init(id: id, size: size, point: point, alpha: alpha, color: color)
     }
     
     func showMyImage() -> MyImage{

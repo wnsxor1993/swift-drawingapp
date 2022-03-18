@@ -15,9 +15,9 @@ final class Label: RectValue, CustomStringConvertible{
         return description
     }
     
-    init(text: MyText, id: String, size: MySize, point: MyPoint, alpha: Alpha){
+    init(text: MyText, color: RGBColor, id: String, size: MySize, point: MyPoint, alpha: Alpha){
         self.text = text
-        super.init(id: id, size: size, point: point, alpha: alpha)
+        super.init(id: id, size: size, point: point, alpha: alpha, color: color)
     }
     
     func showMyText() -> MyText{

@@ -7,20 +7,13 @@
 
 import Foundation
 
-final class Rectangle: RectValue, CustomStringConvertible{
-    private(set) var color: RGBColor
-    
+class Rectangle: RectValue, CustomStringConvertible{
     var description: String{
         let description = "[\(showValueId())] : (X: \(point.x), Y:\(point.y)) / (W: \(size.width), H:\(size.height)) / (R: \(color.red), G: \(color.green), B: \(color.blue)) / Alpha: \(alpha)"
         return description
     }
     
-    func changeColor(color: RGBColor){
-        self.color = color
-    }
-    
     init(id: String, size: MySize, point: MyPoint, color: RGBColor, alpha: Alpha){
-        self.color = color
-        super.init(id: id, size: size, point: point, alpha: alpha)
+        super.init(id: id, size: size, point: point, alpha: alpha, color: color)
     }
 }

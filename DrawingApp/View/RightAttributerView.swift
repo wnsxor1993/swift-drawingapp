@@ -129,10 +129,10 @@ extension RightAttributerView{
         alphaSlider.isContinuous = false
         
         widthStepper.minimumValue = 1
-        widthStepper.maximumValue = 150
+        widthStepper.maximumValue = 300
         widthStepper.stepValue = 1
         heightStepper.minimumValue = 1
-        heightStepper.maximumValue = 120
+        heightStepper.maximumValue = 240
         heightStepper.stepValue = 1
         xPositionStepper.minimumValue = 1
         xPositionStepper.stepValue = 1

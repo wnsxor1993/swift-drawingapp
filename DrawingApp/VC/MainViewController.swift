@@ -121,10 +121,10 @@ extension MainViewController{
         
         let labelView = CustomViewFactory.makeViewFrame(value: labelValue)
         
-        labelView.alpha = CustomViewFactory.setViewAlpha(value: labelValue)
         labelView.text = CustomViewFactory.setLabelViewText(value: labelValue)
-        labelView.restorationIdentifier = CustomViewFactory.setViewID(value: labelValue)
+        let newSize = labelView.intrinsicContentSize
         
+        labelView.restorationIdentifier = CustomViewFactory.setViewID(value: labelValue)
         labelView.backgroundColor = CustomViewFactory.setViewBackgroundColor(value: labelValue)
         labelView.alpha = CustomViewFactory.setViewAlpha(value: labelValue)
         
@@ -201,16 +201,15 @@ extension MainViewController {
 
 extension MainViewController{
     private func displaySliderValue<T: RectValue>(selected: T){
-        if let rectangle = selected as? Rectangle{
-            rightAttributerView.originSliderValue(red: Float(rectangle.color.red), green: Float(rectangle.color.green), blue: Float(rectangle.color.blue), alpha: Float(rectangle.alpha.showValue()))
-            
-            rightAttributerView.useColorSlider()
-            rightAttributerView.useAlphaSlider()
-            
-        } else if let image = selected as? Image{
+        if let image = selected as? Image{
             rightAttributerView.originSliderValue(red: 0, green: 0, blue: 0, alpha: Float(image.alpha.showValue()))
             
             rightAttributerView.rockColorSlider()
+            rightAttributerView.useAlphaSlider()
+        } else{
+            rightAttributerView.originSliderValue(red: Float(selected.color.red), green: Float(selected.color.green), blue: Float(selected.color.blue), alpha: Float(selected.alpha.showValue()))
+            
+            rightAttributerView.useColorSlider()
             rightAttributerView.useAlphaSlider()
         }
     }
@@ -333,15 +332,15 @@ extension MainViewController: UIColorSliderDelegate{
     
     private func changeRectangleColor(){
         let newColor = RGBColor(red: rightAttributerView.redValue, green: rightAttributerView.greenValue, blue: rightAttributerView.blueValue)
-        plane.changeRectangleColor(newColor: newColor)
+        plane.changeRectValueColor(newColor: newColor)
     }
     
     @objc func changeViewColor(){
-        guard let rectangle = plane.selectedValue as? Rectangle, let rectView = customUIViews[rectangle] else{
+        guard let rectValue = plane.selectedValue, let rectView = customUIViews[rectValue] else{
             return
         }
         
-        rectView.backgroundColor = UIColor(red: rectangle.color.redValue(), green: rectangle.color.greenValue(), blue: rectangle.color.blueValue(), alpha: rectangle.alpha.showValue())
+        rectView.backgroundColor = UIColor(red: rectValue.color.redValue(), green: rectValue.color.greenValue(), blue: rectValue.color.blueValue(), alpha: rectValue.alpha.showValue())
     }
     
     private func changeRectValueAlpha(){

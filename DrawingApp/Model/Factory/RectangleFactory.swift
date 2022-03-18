@@ -79,7 +79,7 @@ extension RectangleFactory{
     }
     
     func makePosition(text: MyText, viewWidth: Double, viewHeight: Double) -> Label{
-        let labelRectangle = Label(text: text, id: IDFactory.makeID(), size: makeSize(), point: makePoint(viewWidth: viewWidth, viewHeight: viewHeight), alpha: makeAlpha())
+        let labelRectangle = Label(text: text, color: makeColor(), id: IDFactory.makeID(), size: makeSize(), point: makePoint(viewWidth: viewWidth, viewHeight: viewHeight), alpha: makeAlpha())
         return labelRectangle
     }
 }
