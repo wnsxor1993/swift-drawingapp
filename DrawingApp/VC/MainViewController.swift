@@ -19,12 +19,14 @@ class MainViewController: UIViewController{
     
     @IBOutlet weak var rectangleButton: UIButton!
     @IBOutlet weak var albumButton: UIButton!
+    @IBOutlet weak var labelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         rectangleButton.layer.cornerRadius = 15
         albumButton.layer.cornerRadius = 15
+        labelButton.layer.cornerRadius = 15
         
         imagePicker.delegate = self
         rightAttributerView.sliderDelegate = self
@@ -57,7 +59,7 @@ extension MainViewController{
         guard let rectangleValue = notification.userInfo?[Plane.NotificationName.userInfoKey] as? Rectangle else { return }
         
         let rectangleView = CustomViewFactory.makeViewFrame(value: rectangleValue)
-        rectangleView.backgroundColor = CustomViewFactory.setRectangleViewBackgroundColor(value: rectangleValue)
+        rectangleView.backgroundColor = CustomViewFactory.setViewBackgroundColor(value: rectangleValue)
         rectangleView.alpha = CustomViewFactory.setViewAlpha(value: rectangleValue)
         rectangleView.restorationIdentifier = CustomViewFactory.setViewID(value: rectangleValue)
         
@@ -106,6 +108,34 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
 }
 
 
+// MARK: - Use case: Make LabelView
+
+extension MainViewController{
+    @IBAction func addRandomLabel(_ sender: Any) {
+        let label = rectFactory.makePosition(text: rectFactory.makeText(), viewWidth: self.rightAttributerView.frame.minX, viewHeight: self.rectangleButton.frame.minY)
+        plane.addValue(label: label)
+    }
+    
+    @objc func addLabelView(_ notification: Notification){
+        guard let labelValue = notification.userInfo?[Plane.NotificationName.userInfoKey] as? Label else { return }
+        
+        let labelView = CustomViewFactory.makeViewFrame(value: labelValue)
+        
+        labelView.alpha = CustomViewFactory.setViewAlpha(value: labelValue)
+        labelView.text = CustomViewFactory.setLabelViewText(value: labelValue)
+        labelView.restorationIdentifier = CustomViewFactory.setViewID(value: labelValue)
+        
+        labelView.backgroundColor = CustomViewFactory.setViewBackgroundColor(value: labelValue)
+        labelView.alpha = CustomViewFactory.setViewAlpha(value: labelValue)
+        
+        self.view.addSubview(labelView)
+        customUIViews[labelValue] = labelView
+        
+        os_log("%@", "\(labelValue.description)")
+    }
+}
+
+
 // MARK: - Use case: Add observers
 
 extension MainViewController{
@@ -113,6 +143,8 @@ extension MainViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(addRectangleView(_:)), name: Plane.NotificationName.makeRectangle, object: plane)
         
         NotificationCenter.default.addObserver(self, selector: #selector(addImageRectangleView(_:)), name: Plane.NotificationName.makeImage, object: plane)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(addLabelView(_:)), name: Plane.NotificationName.makeLabel, object: plane)
     }
     
     private func addGestureRecognizerObserver(){
@@ -248,13 +280,7 @@ extension MainViewController {
         }
 
         panGestureExtraView = copy
-        
-        guard let extraView = panGestureExtraView else{
-            os_log("Can't copy CustomView")
-            return
-        }
-        
-        self.view.addSubview(extraView)
+        self.view.addSubview(copy)
     }
     
     private func moveExtraView(moveDistance: CGPoint){
@@ -336,20 +362,22 @@ extension MainViewController: UIColorSliderDelegate{
 
 extension MainViewController: StepperDelegate{
     func pointValueDidChange() {
-        changeRectValuePoint()
+        changeRectValuePoint(extraView: nil)
     }
     
     func sizeValueDidChange() {
         changeRectValueSize()
     }
     
-    private func changeRectValuePoint(){
-        let newPoint = MyPoint(x: rightAttributerView.xValue, y: rightAttributerView.yValue)
-        plane.changeRectValuePoint(newPoint: newPoint)
-    }
-    
-    private func changeRectValuePoint(extraView: UIView){
-        let newPoint = MyPoint(x: extraView.frame.origin.x, y: extraView.frame.origin.y)
+    private func changeRectValuePoint(extraView: UIView?){
+        var newPoint: MyPoint
+        
+        if let extraView = extraView {
+            newPoint = MyPoint(x: extraView.frame.origin.x, y: extraView.frame.origin.y)
+        } else{
+            newPoint = MyPoint(x: rightAttributerView.xValue, y: rightAttributerView.yValue)
+        }
+        
         plane.changeRectValuePoint(newPoint: newPoint)
     }
     

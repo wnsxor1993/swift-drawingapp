@@ -27,10 +27,12 @@ class RectangleFactoryTest: XCTestCase {
         let randomPoint = rectangleFactory.makePoint(viewWidth: 500, viewHeight: 500)
         let randomColor = rectangleFactory.makeColor()
         let randomAlpha = rectangleFactory.makeAlpha()
+        let randomText = rectangleFactory.makeText()
         
-        let wrongRandomPoint = rectangleFactory.makePoint(viewWidth: 100, viewHeight: 100)
-        let rectangle = rectangleFactory.makeRandomRectangle(viewWidth: 200, viewHeight: 200)
-        let imageRectangle = rectangleFactory.makeRandomImageRectangle(image: MyImage(image: namedImage), viewWidth: 100, viewHeight: 100)
+        //let wrongRandomPoint = rectangleFactory.makePoint(viewWidth: 100, viewHeight: 100)
+        let rectangle = rectangleFactory.makePosition(viewWidth: 200, viewHeight: 200)
+        let imageRectangle = rectangleFactory.makePosition(image: MyImage(image: namedImage), viewWidth: 200, viewHeight: 200)
+        let labelRectangle = rectangleFactory.makePosition(text: randomText, viewWidth: 200, viewHeight: 200)
     }
 
     func testPerformanceExample() throws {

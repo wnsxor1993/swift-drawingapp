@@ -11,6 +11,8 @@ final class Plane{
     enum NotificationName{
         static let makeRectangle = Notification.Name("makeRectangle")
         static let makeImage = Notification.Name("makeImage")
+        static let makeLabel = Notification.Name("makeLabel")
+        
         static let selectValue = Notification.Name("selectValue")
         static let noneSelect = Notification.Name("noneSelect")
         
@@ -40,6 +42,11 @@ final class Plane{
     func addValue(image: Image){
         self.values.append(image)
         NotificationCenter.default.post(name: Plane.NotificationName.makeImage, object: self, userInfo: [Plane.NotificationName.userInfoKey : image])
+    }
+    
+    func addValue(label: Label){
+        self.values.append(label)
+        NotificationCenter.default.post(name: Plane.NotificationName.makeLabel, object: self, userInfo: [Plane.NotificationName.userInfoKey : label])
     }
     
     func count() -> Int{

@@ -20,9 +20,9 @@ class ImageTest: XCTestCase {
             return
         }
         
-        let image = Image(image: MyImage(image: namedImage), size: MySize(width: 100, height: 100), point: MyPoint(x: 15, y: 15), alpha: Alpha.seven)
+        let image = Image(image: MyImage(image: namedImage), id: "abcd", size: MySize(width: 100, height: 100), point: MyPoint(x: 15, y: 15), alpha: Alpha.seven)
         let description = image.description
-        let myImage = image.image
+        let myImage = image.showMyImage()
         let size = image.size
         let point = image.point
         let alpha = image.alpha

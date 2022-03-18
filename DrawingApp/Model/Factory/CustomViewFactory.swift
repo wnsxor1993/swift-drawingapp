@@ -9,19 +9,7 @@ import Foundation
 import UIKit
 
 final class CustomViewFactory{
-    static func makeViewFrame(value: Rectangle) -> RectangleView{
-        let rectangleView = RectangleView(frame: CGRect(x: value.point.x, y: value.point.y, width: value.size.width, height: value.size.height))
-        
-        return rectangleView
-    }
-    
-    static func makeViewFrame(value: Image) -> ImageView{
-        let imageView = ImageView(frame: CGRect(x: value.point.x, y: value.point.y, width: value.size.width, height: value.size.height))
-        
-        return imageView
-    }
-    
-    static func setRectangleViewBackgroundColor(value: Rectangle) -> UIColor{
+    static func setViewBackgroundColor(value: RectValue) -> UIColor{
         return UIColor(red: value.color.redValue(), green: value.color.greenValue(), blue: value.color.blueValue(), alpha: 1)
     }
     
@@ -35,5 +23,32 @@ final class CustomViewFactory{
     
     static func setViewID(value: RectValue) -> String{
         return value.showValueId()
+    }
+    
+    static func setLabelViewText(value: Label) -> String{
+        return value.showMyText().showText()
+    }
+}
+
+
+// MARK: - Use case: Make view frame
+
+extension CustomViewFactory{
+    static func makeViewFrame(value: Rectangle) -> RectangleView{
+        let rectangleView = RectangleView(frame: CGRect(x: value.point.x, y: value.point.y, width: value.size.width, height: value.size.height))
+        
+        return rectangleView
+    }
+    
+    static func makeViewFrame(value: Image) -> ImageView{
+        let imageView = ImageView(frame: CGRect(x: value.point.x, y: value.point.y, width: value.size.width, height: value.size.height))
+        
+        return imageView
+    }
+    
+    static func makeViewFrame(value: Label) -> LabelView{
+        let labelView = LabelView(frame: CGRect(x: value.point.x, y: value.point.y, width: value.size.width, height: value.size.height))
+        
+        return labelView
     }
 }

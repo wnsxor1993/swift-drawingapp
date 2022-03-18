@@ -12,16 +12,6 @@ final class RectangleFactory{
     private let width: Double = 150
     private let height: Double = 120
     
-    func makePosition(viewWidth: Double, viewHeight: Double) -> Rectangle{
-        let rectangle = Rectangle(id: IDFactory.makeID(), size: makeSize(), point: makePoint(viewWidth: viewWidth, viewHeight: viewHeight), color: makeColor(), alpha: makeAlpha())
-        return rectangle
-    }
-    
-    func makePosition(image: MyImage, viewWidth: Double, viewHeight: Double) -> Image{
-        let imageRectangle = Image(image: image, id: IDFactory.makeID(), size: makeSize(), point: makePoint(viewWidth: viewWidth, viewHeight: viewHeight), alpha: makeAlpha())
-        return imageRectangle
-    }
-    
     func makeSize() -> MySize{
         let size = MySize(width: self.width, height: self.height)
         return size
@@ -53,5 +43,43 @@ final class RectangleFactory{
         } else{
             return .five
         }
+    }
+    
+    func makeText() -> MyText{
+        var text: String = ""
+        let sentence: [String] = MyText.sentence.components(separatedBy: " ")
+        var startIndex = Int.random(in: 0...sentence.count - 4)
+        let endIndex = startIndex + 4
+        
+        while startIndex <= endIndex{
+            if startIndex == endIndex{
+                text.append(contentsOf: sentence[startIndex])
+            } else{
+                text.append(contentsOf: "\(sentence[startIndex]) ")
+            }
+            startIndex += 1
+        }
+        
+        return MyText(text: text)
+    }
+}
+
+
+// MARK: - Use case: Make value's position
+
+extension RectangleFactory{
+    func makePosition(viewWidth: Double, viewHeight: Double) -> Rectangle{
+        let rectangle = Rectangle(id: IDFactory.makeID(), size: makeSize(), point: makePoint(viewWidth: viewWidth, viewHeight: viewHeight), color: makeColor(), alpha: makeAlpha())
+        return rectangle
+    }
+    
+    func makePosition(image: MyImage, viewWidth: Double, viewHeight: Double) -> Image{
+        let imageRectangle = Image(image: image, id: IDFactory.makeID(), size: makeSize(), point: makePoint(viewWidth: viewWidth, viewHeight: viewHeight), alpha: makeAlpha())
+        return imageRectangle
+    }
+    
+    func makePosition(text: MyText, viewWidth: Double, viewHeight: Double) -> Label{
+        let labelRectangle = Label(text: text, id: IDFactory.makeID(), size: makeSize(), point: makePoint(viewWidth: viewWidth, viewHeight: viewHeight), alpha: makeAlpha())
+        return labelRectangle
     }
 }

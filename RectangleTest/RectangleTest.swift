@@ -18,7 +18,7 @@ class RectangleTest: XCTestCase {
     func testExample() throws {
         let rectangle = Rectangle(id: "abcd", size: MySize(width: 100, height: 100), point: MyPoint(x: 10, y: 10), color: RGBColor(red: 100/255, green: 100/255, blue: 100/255), alpha: Alpha.five)
         
-        let id = rectangle.id
+        let id = rectangle.showValueId()
         let point = rectangle.point
         let size = rectangle.size
         let alpha = rectangle.alpha
